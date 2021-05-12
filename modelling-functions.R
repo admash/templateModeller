@@ -13,7 +13,7 @@
 library(survival)
 library(dplyr)
 library(magrittr)
-library(XLConnect)
+library(XLConnect) # Requires Java
 
 
 #### Concepts ####
