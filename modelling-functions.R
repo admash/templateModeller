@@ -1,3 +1,10 @@
+# A modelling/templating framework implementing the following functionality:
+# 1. Serial/Parallel application of templates on a model(s)
+# 2. Running a list of models and producing tidy result tables
+# 3. The conversion of result tables into a named vector of values
+# 4. The loading/subsitution/writing of result templates
+# The code is best understood together with the example.
+
 
 #install.packages("assertthat")
 #install.packages("broom")
@@ -8,6 +15,36 @@ library(dplyr)
 library(magrittr)
 library(XLConnect)
 
+
+#### Concepts ####
+
+# MODEL: a list object with the following elements
+#  model - a logical vector indicating the list is a model
+#  predictors - character vector of model covariates
+#  outcome_str - string containing Cox Surv() object specification
+#  names - character vector of short text strings which will be concatenated to produce the model identifier/name
+
+# MODEL TEMPLATE: a function that takes a model and returns a modified model
+#  - Usually adds to, or changes existing model elements (see above).
+#  - Usually adds an addition short string to the "names" element
+
+# RESULT OBJECT: an augmented regression fit object with additional elements
+#  - original fit object
+#  - model specification
+#  - additional result table with term names, point estimates, confidence intervals
+
+# POSTPROCESSING: a user-supplied/applied function that adds to the result table whatever 
+# formatted columns the user desires, derived from existing columns.
+
+# RESULT VECTOR: named character vector of formatted results derived from the result tables
+
+# RESULT INPUT TEMPLATE: an Excel .xlsx spreadsheet with formatted tables
+#   whose cells contain the string identifiers which correspond to
+#   the names of values in the RESULT VECTOR.
+
+# RESULT OUTPUT TEMPLATE: an Excel .xlsx spreadsheet with formatted tables
+#   whose cells contain the corresponding values substituted from th
+#   RESULT VECTOR.
 
 #### Template helper functions ####
 
