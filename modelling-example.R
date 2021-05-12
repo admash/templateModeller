@@ -1,6 +1,25 @@
+#install.packages("haven")
 library(dplyr)
+library(survival)
 
 source("modelling-functions.R")
+
+#### Description ####
+# This toy example uses the Rotterdam Study survival data.
+# Models are constructed which perform Cox proportional hazard
+# regression to model the cancer mortality and recurrence hazards 
+# across the whole cohort as well and the pre- and post-menopausal
+# sub-cohorts.
+#
+# The output template presents two tables which show the 
+# hazard ratios associated with estrogen/progesterone receptor 
+# status across the above-mentioned cohort/sub-cohorts.
+#
+# WARNING: Absolutely no effort has been made to ensure that these
+# models are epidemiologically sound. The results are not to be
+# used for anything other than demonstrating the modelling/templating
+# functions.
+# 
 
 #### Data ####
 
