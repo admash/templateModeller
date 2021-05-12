@@ -106,6 +106,7 @@ templates = list(
 
 #### Custom Post Processing Function ####
 
+# Adds formatted hazard ratio w/ CI and formatted p-value columns.
 postprocess <- function(result){
   result$table %<>%
     mutate(hrci = paste0(format(exp(estimate), digits=1, nsmall=2), " (",  # HR w/ 95% CI
@@ -125,6 +126,8 @@ results <- list(base_model) %>%
   parallel_apply(templates[c("all", "premenop", "postmenop")]) %>%
   lapply(run_model, dataset=dataset) %>%
   lapply(postprocess)
+
+#### Fill result template with result values ####
 
 result_values <- results %>% make_template_values()
 
